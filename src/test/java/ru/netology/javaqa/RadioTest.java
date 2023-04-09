@@ -5,21 +5,39 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
     @Test
-    public void testSetCurrentStation() {
+    public void shouldSetCurrentStationWithoutArgument() {
         Radio radio = new Radio();
 
-        radio.setCurrentStation(4);
-        Assertions.assertEquals(4, radio.getCurrentStation());
-
-        radio.setCurrentStation(-1);
-        Assertions.assertEquals(4, radio.getCurrentStation());
-
-        radio.setCurrentStation(10);
-        Assertions.assertEquals(4, radio.getCurrentStation());
+        Assertions.assertEquals(10, radio.getStationCount());
+        Assertions.assertEquals(0, radio.getCurrentStation());
+        Assertions.assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void testNextStation() {
+    public void shouldSetCurrentStationWithArgument() {
+        Radio radio = new Radio(20);
+
+        Assertions.assertEquals(20, radio.getStationCount());
+        Assertions.assertEquals(0, radio.getCurrentStation());
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldSetCurrentStation() {
+        Radio radio = new Radio();
+
+        radio.setCurrentStation(5);
+        Assertions.assertEquals(5, radio.getCurrentStation());
+
+        radio.setCurrentStation(-1);
+        Assertions.assertEquals(5, radio.getCurrentStation());
+
+        radio.setCurrentStation(10);
+        Assertions.assertEquals(5, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldSwitchNextStation() {
         Radio radio = new Radio();
 
         radio.nextStation();
@@ -31,7 +49,7 @@ public class RadioTest {
     }
 
     @Test
-    public void testPrevStation() {
+    public void shouldSwitchPrevStation() {
         Radio radio = new Radio();
 
         radio.prevStation();
@@ -42,8 +60,9 @@ public class RadioTest {
         Assertions.assertEquals(8, radio.getCurrentStation());
     }
 
+
     @Test
-    public void testSetCurrentVolume() {
+    public void shouldSetCurrentVolume() {
         Radio volume = new Radio();
 
         volume.setCurrentVolume(50);
@@ -57,7 +76,7 @@ public class RadioTest {
     }
 
     @Test
-    public void testUpVolume() {
+    public void shouldUpVolume() {
         Radio volume = new Radio();
 
         volume.upVolume();
@@ -69,7 +88,7 @@ public class RadioTest {
     }
 
     @Test
-    public void testDownVolume() {
+    public void shouldDownVolume() {
         Radio volume = new Radio();
 
         volume.downVolume();

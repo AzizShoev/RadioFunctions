@@ -1,59 +1,69 @@
 package ru.netology.javaqa;
 
 public class Radio {
-    private int currentStation;  //Станция
+    private int stationCount = 10;   //Количество станции, задано 10
+    private int currentStation;  //Текущая станция
     private int currentVolume;   //Громкость
 
-    public int getCurrentStation() { //Текущая станции
+    public Radio() {    //Конструктор без заданых парамтров
+    }
+
+    public Radio(int stationCount) {    //Конструктор с заданым параметром станций
+        this.stationCount = stationCount;
+        this.currentStation = 0;
+        this.currentVolume = 0;
+    }
+
+    public int getStationCount() {  //Заданное кол-во станций
+        return stationCount;
+    }
+
+    public int getCurrentStation() {    //Заданная станции
         return currentStation;
     }
 
-    public void setCurrentStation(int station) { //Границы станций
-        if (station < 0 || station > 9) {
-            return;
+    public void setCurrentStation(int station) {    //Границы станций 0-9
+        if (station >= 0 && station < stationCount) {
+            this.currentStation = station;
         }
-        currentStation = station;
     }
 
-    public void nextStation() { //Станция 9, если нажать next то станция 0
-        if (currentStation == 9) {
+    public void nextStation() { //Кнопка станция +
+        if (currentStation == stationCount - 1) {
             currentStation = 0;
         } else {
             currentStation++;
         }
     }
 
-    public void prevStation() { //Стнация 0, если нажать prev то станция 9
+    public void prevStation() { //Кнопка станция -
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = stationCount - 1;
         } else {
             currentStation--;
         }
     }
 
-    public int getCurrentVolume() { //Текущая громкость
+    public int getCurrentVolume() { //Заданная громкость
+
         return currentVolume;
     }
 
-    public void setCurrentVolume(int volume) {  //Границы громкости
+    public void setCurrentVolume(int volume) {  //Границы громкости 0-100
         if (volume < 0 || volume > 100) {
             return;
         }
         currentVolume = volume;
     }
 
-    public void upVolume() {  //Увеличение громкости
-        if (currentVolume == 100) {
-            currentVolume = 100;
-        } else {
+    public void upVolume() {  //Увеличение громкости +
+        if (currentVolume < 100) {
             currentVolume++;
         }
     }
 
-    public void downVolume() {   //Уменьшение громкости
-        if (currentVolume == 0) {
-            currentVolume = 0;
-        } else {
+    public void downVolume() {   //Уменьшение громкости -
+        if (currentVolume > 0) {
             currentVolume--;
         }
     }
