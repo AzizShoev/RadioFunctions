@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
+    Radio radio = new Radio();
+
     @Test
     public void shouldSetCurrentStationWithoutArgument() {
-        Radio radio = new Radio();
-
         Assertions.assertEquals(10, radio.getStationCount());
         Assertions.assertEquals(0, radio.getCurrentStation());
         Assertions.assertEquals(0, radio.getCurrentVolume());
@@ -15,17 +15,15 @@ public class RadioTest {
 
     @Test
     public void shouldSetCurrentStationWithArgument() {
-        Radio radio = new Radio(20);
+        Radio radio = new Radio(20, 5, 50);
 
         Assertions.assertEquals(20, radio.getStationCount());
-        Assertions.assertEquals(0, radio.getCurrentStation());
-        Assertions.assertEquals(0, radio.getCurrentVolume());
+        Assertions.assertEquals(5, radio.getCurrentStation());
+        Assertions.assertEquals(50, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldSetCurrentStation() {
-        Radio radio = new Radio();
-
         radio.setCurrentStation(5);
         Assertions.assertEquals(5, radio.getCurrentStation());
 
@@ -38,8 +36,6 @@ public class RadioTest {
 
     @Test
     public void shouldSwitchNextStation() {
-        Radio radio = new Radio();
-
         radio.nextStation();
         Assertions.assertEquals(1, radio.getCurrentStation());
 
@@ -50,8 +46,6 @@ public class RadioTest {
 
     @Test
     public void shouldSwitchPrevStation() {
-        Radio radio = new Radio();
-
         radio.prevStation();
         Assertions.assertEquals(9, radio.getCurrentStation());
 
@@ -63,39 +57,33 @@ public class RadioTest {
 
     @Test
     public void shouldSetCurrentVolume() {
-        Radio volume = new Radio();
+        radio.setCurrentVolume(50);
+        Assertions.assertEquals(50, radio.getCurrentVolume());
 
-        volume.setCurrentVolume(50);
-        Assertions.assertEquals(50, volume.getCurrentVolume());
+        radio.setCurrentVolume(-1);
+        Assertions.assertEquals(50, radio.getCurrentVolume());
 
-        volume.setCurrentVolume(-1);
-        Assertions.assertEquals(50, volume.getCurrentVolume());
-
-        volume.setCurrentVolume(101);
-        Assertions.assertEquals(50, volume.getCurrentVolume());
+        radio.setCurrentVolume(101);
+        Assertions.assertEquals(50, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldUpVolume() {
-        Radio volume = new Radio();
+        radio.upVolume();
+        Assertions.assertEquals(1, radio.getCurrentVolume());
 
-        volume.upVolume();
-        Assertions.assertEquals(1, volume.getCurrentVolume());
-
-        volume.setCurrentVolume(100);
-        volume.upVolume();
-        Assertions.assertEquals(100, volume.getCurrentVolume());
+        radio.setCurrentVolume(100);
+        radio.upVolume();
+        Assertions.assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldDownVolume() {
-        Radio volume = new Radio();
+        radio.downVolume();
+        Assertions.assertEquals(0, radio.getCurrentVolume());
 
-        volume.downVolume();
-        Assertions.assertEquals(0, volume.getCurrentVolume());
-
-        volume.setCurrentVolume(100);
-        volume.downVolume();
-        Assertions.assertEquals(99, volume.getCurrentVolume());
+        radio.setCurrentVolume(100);
+        radio.downVolume();
+        Assertions.assertEquals(99, radio.getCurrentVolume());
     }
 }
